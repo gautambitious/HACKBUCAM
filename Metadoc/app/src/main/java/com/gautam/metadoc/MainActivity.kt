@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             val password = passwordText.editText?.text.toString()
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                 toast("SuccessFully LoggedIn")
+
 //                startActivity<PatientHomeActivity>()
             }.addOnFailureListener{
                 toast("Error: "+it.message)
