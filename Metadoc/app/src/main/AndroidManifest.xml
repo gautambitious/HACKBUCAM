@@ -12,7 +12,10 @@
         <activity android:name=".RecordAppointmentActivity"></activity>
         <activity android:name=".DoctorMainActivity" />
         <activity android:name=".DoctorHomeActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".PatientHomeActivity"
@@ -20,11 +23,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

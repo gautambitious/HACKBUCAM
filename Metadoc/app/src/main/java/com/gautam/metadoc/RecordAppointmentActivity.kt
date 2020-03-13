@@ -8,10 +8,18 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.View
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_record_appointment.*
 
 class RecordAppointmentActivity : AppCompatActivity() {
     val REQUEST_CODE = 123
+    val database by lazy {
+        FirebaseDatabase.getInstance()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_appointment)
@@ -38,6 +46,21 @@ class RecordAppointmentActivity : AppCompatActivity() {
         }
     }
     private fun nlpModelCall(text: String) {
-        Log.i("workk", text)
+        val myRef = database.reference.child("text")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.value
+                Log.d("workk", "Value is: $value")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("workk", "Failed to read value.", error.toException())
+            }
+        })
+
+
     }
 }
