@@ -43,8 +43,10 @@ class MainActivity : AppCompatActivity() {
             val password = passwordText.editText?.text.toString()
             auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                 toast("SuccessFully LoggedIn")
-
-//                startActivity<PatientHomeActivity>()
+                if (radiogroup.checkedRadioButtonId==R.id.patient)
+                    startActivity<PatientHomeActivity>()
+                else
+                    startActivity<DoctorHomeActivity>()
             }.addOnFailureListener{
                 toast("Error: "+it.message)
             }
